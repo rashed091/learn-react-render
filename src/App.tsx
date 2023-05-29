@@ -1,35 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { memo, useState } from "react";
+import { Layout, Button, VisualComponent } from "./components/components";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const ComponentA = () => {
+  const [counter, setCounter] = useState(0);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <VisualComponent title="Component A">
+      <Button onClick={() => setCounter(counter + 1)}>Update State</Button>
+      <ComponentB />
+    </VisualComponent>
+  );
+};
 
-export default App
+const ComponentB = memo(() => {
+  const [counter, setCounter] = useState(1);
+  return (
+    <VisualComponent title="Component B">
+      <Button onClick={() => setCounter(counter + 1)}>Update State</Button>
+      <div className="grid grid-rows-2 md:grid-cols-2 md:gap-4 md:grid-rows-1">
+        <ComponentC />
+        <ComponentD />
+      </div>
+    </VisualComponent>
+  );
+});
+
+const ComponentC = () => {
+  const [counter, setCounter] = useState(0);
+  return (
+    <VisualComponent title="Component C">
+      <Button onClick={() => setCounter(counter + 1)}>Update State</Button>
+      <ComponentE />
+    </VisualComponent>
+  );
+};
+
+const ComponentD = () => {
+  const [counter, setCounter] = useState(0);
+  return (
+    <VisualComponent title="Component D">
+      <Button onClick={() => setCounter(counter + 1)}>Update State</Button>
+      <ComponentF />
+    </VisualComponent>
+  );
+};
+
+const ComponentE = () => {
+  const [counter, setCounter] = useState(0);
+  return (
+    <VisualComponent title="Component E">
+      <Button onClick={() => setCounter(counter + 1)}>Update State</Button>
+    </VisualComponent>
+  );
+};
+
+const ComponentF = () => {
+  const [counter, setCounter] = useState(0);
+  return (
+    <VisualComponent title="Component F">
+      <Button onClick={() => setCounter(counter + 1)}>Update State</Button>
+    </VisualComponent>
+  );
+};
+
+export default function App() {
+  return (
+    <Layout>
+      <ComponentA />
+    </Layout>
+  );
+}
